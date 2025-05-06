@@ -5,6 +5,7 @@ st.set_page_config(page_title="Plant Disease Class Prediction", page_icon="🌿"
 import tensorflow as tf
 import numpy as np
 from PIL import Image
+from io import BytesIO
 
 # Load the trained model
 @st.cache_resource
@@ -84,6 +85,9 @@ if uploaded_file is not None:
     col1, col2 = st.columns([1, 2])
 
     with col1:
+        # Ensure image is in RGB mode before displaying
+        image = image.convert("RGB")
+        # Display the image directly without converting to bytes to avoid encoding issues
         st.image(image, caption='Uploaded Image', use_column_width=True)
 
     with col2:
